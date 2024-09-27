@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bivariate Plot</title>
+    <style>
+        h1 {
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+            margin-top: 50px;
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-family: Arial, sans-serif;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Enter PH</h1>
+    <form action="{{ url_for('phin')}}" method="post" enctype = "multipart/form-data">
+        <label for="phval">PH:</label>
+        <input type="number" name="phval" step="any" required>
+        <button type="submit">Submit</button>
+    </form>
+    {% if plot_url!=0 %}
+    <img src="data:image/png;base64,{{ plot_url }}" alt="">
+    {% endif %}
+    {% if plot_url==0 %}
+    <h1>Entered value is not in Dataset</h1>
+    {% endif %}
+</body>
+</html>

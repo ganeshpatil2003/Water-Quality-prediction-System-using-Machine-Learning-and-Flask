@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Water Quality</title>
+    <style>
+      body {
+        background-image: url({{url_for('static', filename='w13.jpg')}});
+        font-family: 'Cursive', sans-serif;
+        background-repeat: no-repeat;
+        background-size: cover;
+        animation: loadtransition 2s;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        font-size: 36px;
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 50px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      }
+
+      input[type="number"] {
+        display: block;
+        width: 90%;
+        border: 2px solid #baeae8;
+        border-radius: 6px;
+        outline: none;
+        padding: 10px;
+        margin: 10px auto;
+        box-shadow: 0px 0px 13px -5px rgba(0, 0, 0, 0.5);
+        transition: all 0.3s;
+        font-family: 'Cursive', sans-serif;
+      }
+
+      input[type="number"]:hover {
+        margin: 15px auto;
+        width: 95%;
+      }
+
+      a.btn, button.btn {
+        display: block;
+        width: 90%;
+        border: none;
+        border-radius: 6px;
+        outline: none;
+        padding: 10px;
+        margin: 10px auto;
+        box-shadow: 0px 0px 13px -5px rgba(0, 0, 0, 0.5);
+        background-color:#28217a;;
+        color: white;
+        font-size: 18px;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-family: 'Cursive', sans-serif;
+      }
+
+      a.btn:hover, button.btn:hover {
+        margin: 15px auto;
+        width: 95%;
+        background-color: #0f094b;
+      }
+
+      .container {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        margin-top: 50px;
+      }
+
+      .project, .projectin {
+        box-shadow: 0px 7px 60px -10px rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        color: #fff;
+        padding: 20px;
+        width: 40%;
+        max-width: 400px;
+        background-color: rgba(0, 0, 0, 0.7);
+        transition: all 0.3s;
+      }
+
+      .project h2, .projectin h2 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        text-align: center;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      }
+
+      @keyframes loadtransition {
+        from {
+          opacity: 0;
+          transform: rotateX(-10deg);
+        }
+
+        to {
+          opacity: 1;
+          transform: rotateX(0deg);
+        }
+      }
+
+      @media only screen and (max-width: 768px) {
+        .container {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .project, .projectin {
+          width: 90%;
+          margin-bottom: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <center><h1>Water Quality</h1></center>
+    <div class="container">
+      <div class="project">
+        <h2>Water Quality Test</h2>
+        <form action="{{ url_for('predict')}}" method="post" enctype = "multipart/form-data">
+          <input type="number" name=" Temperature" step="0.01" placeholder="Temperature" required>
+          <input type="number" name="D.O." step="0.01" placeholder="Dissolved Oxygen" required>
+          <input type="number" name="PH" max="14" step="0.01" placeholder="pH" required>
+          <input type="number" name="CONDUCTIVITY" step="0.01" placeholder="Conductivity" required>
+          <input type="number" name="B.O.D" step="0.01" placeholder="B.O.D" required>
+          <input type="number" name="NITRATE" step="0.01" placeholder="Nitrate" required>
+          <input type="number" name="TOTAL_COLIFORM" step="0.01" placeholder="Total Coliform" required>
+          <a class="btn" href="{{ url_for('predpage') }}" ><button type="submit" class="btn"><strong>Water Quality Test</strong></button></a>
+        </form>
+      </div>
+      <div class="projectin">
+        <h2>Individual Tests</h2>
+        <a href="{{ url_for('index') }}" class="btn">Temperature Test</a>
+        <a href="{{ url_for('ph') }}" class="btn">PH Test</a>
+        <a href="{{ url_for('tc') }}" class="btn">Total Coliform Test</a>
+        <a href="{{ url_for('nitrate') }}" class="btn">Nitrate Test</a>
+        <a href="{{ url_for('bod') }}" class="btn">Biochemical Oxygen Demand Test</a>
+        <a href="{{ url_for('do') }}" class="btn">Dissolved Oxygen Test</a>
+        <a href="{{ url_for('conductivity') }}" class="btn">Conductivity Test</a>
+      </div>
+    </div>
+  </body>
+</html>
